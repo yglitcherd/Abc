@@ -1,207 +1,297 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doces Divertidos 🍬</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            overflow-x: hidden;
-            background: linear-gradient(to right, #ffecd2, #fcb69f);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doces Divertidos 🍬</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fbc2eb, #a1c4fd);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    text-align: center;
+    overflow-x: hidden;
+}
 
-        h1 {
-            color: #ff69b4;
-            font-size: 3em;
-            margin: 20px 0;
-            text-shadow: 2px 2px #fff;
-        }
+@keyframes gradientBG {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
 
-        .buttons-container {
-            margin: 20px 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+h1 {
+    font-size: 3em;
+    color: #ff1493;
+    margin: 20px 0;
+    text-shadow: 2px 2px 10px #fff;
+}
 
-        .sweet-btn {
-            background-color: #ffcc00;
-            border: 2px solid #ff69b4;
-            border-radius: 12px;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            margin: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
 
-        .sweet-btn:hover {
-            background-color: #ff69b4;
-            color: #fff;
-        }
+.sweet-btn {
+    background: linear-gradient(45deg, #ffd700, #ff69b4);
+    border: none;
+    border-radius: 20px;
+    padding: 15px 25px;
+    font-size: 1.3em;
+    margin: 10px;
+    cursor: pointer;
+    box-shadow: 0px 8px 15px rgba(0,0,0,0.3);
+    transition: 0.3s;
+    position: relative;
+}
 
-        .slide-container {
-            max-width: 600px;
-            margin: 20px auto;
-            background-color: #fff7e6;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
-            display: none;
-            position: relative;
-        }
+.sweet-btn:hover {
+    transform: scale(1.2) rotate(-5deg);
+    box-shadow: 0px 12px 25px rgba(0,0,0,0.5);
+    background: linear-gradient(45deg, #ff69b4, #ffd700);
+}
 
-        .slide {
-            display: none;
-            font-size: 1.2em;
-            line-height: 1.5em;
-        }
+.slide-container {
+    max-width: 700px;
+    margin: 20px auto;
+    background-color: #fff9f3;
+    border-radius: 30px;
+    padding: 25px;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.3);
+    display: none;
+    position: relative;
+    overflow: hidden;
+}
 
-        .slide.active {
-            display: block;
-        }
+.slide {
+    display: none;
+    font-size: 1.4em;
+    line-height: 1.8em;
+    padding: 10px;
+    transition: all 0.6s ease;
+}
 
-        .slide img {
-            max-width: 100%;
-            border-radius: 15px;
-            margin: 10px 0;
-        }
+.slide.active {
+    display: block;
+    animation: slideIn 0.6s ease;
+}
 
-        .nav-btn {
-            background-color: #ff69b4;
-            border: none;
-            padding: 10px 15px;
-            color: white;
-            font-size: 1em;
-            border-radius: 10px;
-            margin: 10px;
-            cursor: pointer;
-        }
+@keyframes slideIn {
+    0% {opacity:0; transform: translateY(30px);}
+    100% {opacity:1; transform: translateY(0);}
+}
 
-        .nav-btn:hover {
-            background-color: #ff4500;
-        }
+.nav-btn {
+    background-color: #ff69b4;
+    border: none;
+    padding: 12px 20px;
+    color: white;
+    font-size: 1em;
+    border-radius: 15px;
+    margin: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-        /* Animação de doces flutuando no fundo */
-        .candy {
-            position: absolute;
-            width: 50px;
-            animation: float linear infinite;
-            opacity: 0.8;
-        }
+.nav-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+    background-color: #ff1493;
+    box-shadow: 0px 6px 15px rgba(0,0,0,0.4);
+}
 
-        @keyframes float {
-            0% { transform: translateY(100vh) translateX(0); }
-            100% { transform: translateY(-100vh) translateX(100px); }
-        }
+.tooltip {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
 
-        /* Música de fundo botão */
-        #musicControl {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: #ffcc00;
-            border: 2px solid #ff69b4;
-            border-radius: 50%;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 1000;
-        }
-    </style>
+.tooltip span {
+    visibility: hidden;
+    width: 220px;
+    background-color: #ff69b4;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 5px;
+    position: absolute;
+    z-index: 10;
+    bottom: 120%;
+    left: 50%;
+    margin-left: -110px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover span {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Doces flutuando com emojis */
+.candy-emoji {
+    position: absolute;
+    font-size: 2em;
+    animation: floatEmojis linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes floatEmojis {
+    0% { transform: translateY(0px) rotate(0deg);}
+    50% { transform: translateY(-100px) rotate(180deg);}
+    100% { transform: translateY(0px) rotate(360deg);}
+}
+</style>
 </head>
 <body>
-    <h1>Doces Divertidos 🍭</h1>
 
-    <!-- Botões dos doces -->
-    <div class="buttons-container">
-        <button class="sweet-btn" onclick="showSlides('brigadeiro')">Brigadeiro</button>
-        <button class="sweet-btn" onclick="showSlides('biscoito')">Biscoito</button>
-        <button class="sweet-btn" onclick="showSlides('cupcake')">Cupcake</button>
-        <button class="sweet-btn" onclick="showSlides('pudim')">Pudim</button>
-        <button class="sweet-btn" onclick="showSlides('churros')">Churros</button>
-        <button class="sweet-btn" onclick="showSlides('mousse')">Mousse</button>
-        <button class="sweet-btn" onclick="showSlides('brownie')">Brownie</button>
-        <button class="sweet-btn" onclick="showSlides('gelatina')">Gelatina</button>
-        <button class="sweet-btn" onclick="showSlides('pipoca')">Pipoca Doce</button>
-        <button class="sweet-btn" onclick="showSlides('donut')">Donut</button>
-    </div>
+<h1>Doces Divertidos 🍭</h1>
 
-    <!-- Slides Brigadeiro -->
-    <div id="brigadeiro" class="slide-container">
-        <h2>Brigadeiro 🍫</h2>
-        <div class="slide active">
-            <p>Passo 1: Coloque 1 lata de leite condensado, 1 colher de manteiga e 3 colheres de chocolate em pó na panela.</p>
-            <img src="https://i.imgur.com/8rZWy7v.jpg" alt="Brigadeiro Passo 1">
-        </div>
-        <div class="slide">
-            <p>Passo 2: Cozinhe em fogo médio, mexendo sempre, até desgrudar do fundo da panela.</p>
-            <img src="https://i.imgur.com/Jt3G8yc.jpg" alt="Brigadeiro Passo 2">
-        </div>
-        <div class="slide">
-            <p>Passo 3: Deixe esfriar, enrole e passe no granulado. Pronto para comer!</p>
-            <img src="https://i.imgur.com/YnXdk7k.jpg" alt="Brigadeiro Pronto">
-        </div>
-        <button class="nav-btn" onclick="prevSlide('brigadeiro')">⬅️ Anterior</button>
-        <button class="nav-btn" onclick="nextSlide('brigadeiro')">Próximo ➡️</button>
-    </div>
+<!-- Emojis flutuando -->
+<div class="candy-emoji" style="top:50px; left:50px; animation-duration:12s;">🍬</div>
+<div class="candy-emoji" style="top:150px; left:200px; animation-duration:15s;">🍫</div>
+<div class="candy-emoji" style="top:300px; left:100px; animation-duration:18s;">🍭</div>
+<div class="candy-emoji" style="top:400px; left:300px; animation-duration:20s;">🧁</div>
+<div class="candy-emoji" style="top:250px; left:400px; animation-duration:14s;">🍪</div>
 
-    <!-- Você pode copiar este padrão e trocar as imagens para cada doce -->
+<div class="buttons-container">
+    <button class="sweet-btn" onclick="showSlides('brigadeiro')">Brigadeiro 🍫</button>
+    <button class="sweet-btn" onclick="showSlides('biscoito')">Biscoito 🍪</button>
+    <button class="sweet-btn" onclick="showSlides('cupcake')">Cupcake 🧁</button>
+    <button class="sweet-btn" onclick="showSlides('pudim')">Pudim 🍮</button>
+    <button class="sweet-btn" onclick="showSlides('churros')">Churros 🌟</button>
+    <button class="sweet-btn" onclick="showSlides('mousse')">Mousse 🍓</button>
+    <button class="sweet-btn" onclick="showSlides('brownie')">Brownie 🍫</button>
+    <button class="sweet-btn" onclick="showSlides('gelatina')">Gelatina 🌈</button>
+    <button class="sweet-btn" onclick="showSlides('pipoca')">Pipoca Doce 🍿</button>
+    <button class="sweet-btn" onclick="showSlides('donut')">Donut 🍩</button>
+</div>
 
-    <!-- Doces flutuantes no fundo -->
-    <img src="https://i.imgur.com/oH2fhO6.png" class="candy" style="left:10%; animation-duration:12s;">
-    <img src="https://i.imgur.com/8Z6Jg4C.png" class="candy" style="left:30%; animation-duration:15s;">
-    <img src="https://i.imgur.com/bzE7dFx.png" class="candy" style="left:50%; animation-duration:18s;">
-    <img src="https://i.imgur.com/4pQ7O1X.png" class="candy" style="left:70%; animation-duration:20s;">
-    <img src="https://i.imgur.com/hB9gQun.png" class="candy" style="left:90%; animation-duration:17s;">
+<!-- Aqui começam os slides com emojis para todos os doces -->
+<div id="brigadeiro" class="slide-container">
+    <h2>Brigadeiro 🍫</h2>
+    <div class="slide active">🥫 Leite condensado + 🧈 manteiga + 🍫 chocolate em pó. <span class="tooltip">💡 Mexa sempre!<span></span></span></div>
+    <div class="slide">🔥 Cozinhe até desgrudar do fundo da panela.</div>
+    <div class="slide">❄️ Esfrie, enrole 🖐️ e passe no granulado 🍬. 😋</div>
+    <button class="nav-btn" onclick="prevSlide('brigadeiro')">⬅️ Anterior</button>
+    <button class="nav-btn" onclick="nextSlide('brigadeiro')">Próximo ➡️</button>
+</div>
 
-    <!-- Música de fundo -->
-    <audio id="bgMusic" loop>
-        <source src="https://www.bensound.com/bensound-music/bensound-happyrock.mp3" type="audio/mpeg">
-    </audio>
-    <div id="musicControl" onclick="toggleMusic()">🎵</div>
+<div id="biscoito" class="slide-container">
+    <h2>Biscoito 🍪</h2>
+    <div class="slide active">🥄 Misture farinha, açúcar e 🧈 manteiga. 🍪</div>
+    <div class="slide">🍪 Modele bolinhas, asse 🔥 até dourar.</div>
+    <div class="slide">🎉 Crocantes e prontos para comer 😋</div>
+    <button class="nav-btn" onclick="prevSlide('biscoito')">⬅️</button>
+    <button class="nav-btn" onclick="nextSlide('biscoito')">➡️</button>
+</div>
 
-    <script>
-        let currentSlide = {
-            brigadeiro: 0, biscoito: 0, cupcake: 0, pudim: 0,
-            churros: 0, mousse: 0, brownie: 0, gelatina: 0,
-            pipoca: 0, donut: 0
-        };
+<div id="cupcake" class="slide-container">
+    <h2>Cupcake 🧁</h2>
+    <div class="slide active">🥚 Bata ovos, açúcar e 🧈 manteiga.</div>
+    <div class="slide">🍫 Misture farinha e chocolate em pó. 🔥 Asse em forminhas.</div>
+    <div class="slide">🍓 Decore com cobertura e granulados 🎨</div>
+    <button class="nav-btn" onclick="prevSlide('cupcake')">⬅️</button>
+    <button class="nav-btn" onclick="nextSlide('cupcake')">➡️</button>
+</div>
 
-        function showSlides(sweet) {
-            document.querySelectorAll('.slide-container').forEach(c => c.style.display = 'none');
-            document.getElementById(sweet).style.display = 'block';
-            document.querySelectorAll('#' + sweet + ' .slide').forEach((s,i)=>{
-                s.classList.remove('active');
-                if(i === 0) s.classList.add('active');
-            });
-            currentSlide[sweet] = 0;
-        }
+<div id="pudim" class="slide-container">
+    <h2>Pudim 🍮</h2>
+    <div class="slide active">🥛 Misture leite, ovos 🥚 e açúcar.</div>
+    <div class="slide">🔥 Cozinhe em banho-maria até firmar.</div>
+    <div class="slide">❄️ Esfrie e desenforme 🍮</div>
+    <button class="nav-btn" onclick="prevSlide('pudim')">⬅️</button>
+    <button class="nav-btn" onclick="nextSlide('pudim')">➡️</button>
+</div>
 
-        function nextSlide(sweet) {
-            let slides = document.querySelectorAll('#' + sweet + ' .slide');
-            slides[currentSlide[sweet]].classList.remove('active');
-            currentSlide[sweet] = (currentSlide[sweet] + 1) % slides.length;
-            slides[currentSlide[sweet]].classList.add('active');
-        }
+<div id="churros" class="slide-container">
+    <h2>Churros 🌟</h2>
+    <div class="slide active">🥄 Misture farinha, água e sal.</div>
+    <div class="slide">🔥 Frite, passe em açúcar e canela 🌰.</div>
+    <div class="slide">🍫 Sirva com chocolate derretido 😍</div>
+    <button class="nav-btn" onclick="prevSlide('churros')">⬅️</button>
+    <button class="nav-btn" onclick="nextSlide('churros')">➡️</button>
+</div>
 
-        function prevSlide(sweet) {
-            let slides = document.querySelectorAll('#' + sweet + ' .slide');
-            slides[currentSlide[sweet]].classList.remove('active');
-            currentSlide[sweet] = (currentSlide[sweet] - 1 + slides.length) % slides.length;
-            slides[currentSlide[sweet]].classList.add('active');
-        }
+<div id="mousse" class="slide-container">
+    <h2>Mousse 🍓</h2>
+    <div class="slide active">🥚 Bata gemas com açúcar.</div>
+    <div class="slide">🍫 Misture chocolate derretido, depois claras em neve ❄️</div>
+    <div class="slide">🥶 Leve à geladeira até firmar. 😋</div>
+    <button class="nav-btn" onclick="prevSlide('mousse')">⬅️</button>
+    <button class="nav-btn" onclick="nextSlide('mousse')">➡️</button>
+</div>
 
-        // Música de fundo
-        function toggleMusic() {
-            const music = document.getElementById('bgMusic');
-            if(music.paused) music.play();
-            else music.pause();
-        }
-    </script>
+<div id="brownie" class="slide-container">
+    <h2>Brownie 🍫</h2>
+    <div class="slide active">🍫 Chocolate derretido + 🧈 manteiga</div>
+    <div class="slide">🥚 Acrescente ovos e açúcar, misture farinha.</div>
+    <div class="slide">🔥 Asse até crocante por fora e macio por dentro 😍</div>
+    <button class="nav-btn" onclick="prevSlide('brownie')">⬅️</button>
+    <button class="nav-btn" onclick="nextSlide('brownie')">➡️</button>
+</div>
+
+<div id="gelatina" class="slide-container">
+    <h2>Gelatina 🌈</h2>
+    <div class="slide active">💧 Dissolva gelatina em água quente.</div>
+    <div class="slide">❄️ Leve à geladeira até firmar.</div>
+    <div class="slide">🍓 Decore com frutas 🍇🍍🍓</div>
+    <button class="nav-btn" onclick="prevSlide('gelatina')">⬅️</button>
+    <button class="nav-btn" onclick="nextSlide('gelatina')">➡️</button>
+</div>
+
+<div id="pipoca" class="slide-container">
+    <h2>Pipoca Doce 🍿</h2>
+    <div class="slide active">🌽 Estoure a pipoca no microondas ou panela 🛢️</div>
+    <div class="slide">🍯 Misture com açúcar ou mel 😍</div>
+    <div class="slide">🎉 Sirva quentinha e crocante 😋</div>
+    <button class="nav-btn" onclick="prevSlide('pipoca')">⬅️</button>
+    <button class="nav-btn" onclick="nextSlide('pipoca')">➡️</button>
+</div>
+
+<div id="donut" class="slide-container">
+    <h2>Donut 🍩</h2>
+    <div class="slide active">🥄 Misture farinha, ovos 🥚 e leite 🥛</div>
+    <div class="slide">🔥 Frite até dourar ✨</div>
+    <div class="slide">🍫 Cubra com chocolate e granulados 🎨</div>
+    <button class="nav-btn" onclick="prevSlide('donut')">⬅️</button>
+    <button class="nav-btn" onclick="nextSlide('donut')">➡️</button>
+</div>
+
+<script>
+let currentSlide = {
+    brigadeiro:0, biscoito:0, cupcake:0, pudim:0,
+    churros:0, mousse:0, brownie:0, gelatina:0,
+    pipoca:0, donut:0
+};
+
+function showSlides(sweet){
+    document.querySelectorAll('.slide-container').forEach(c => c.style.display='none');
+    document.getElementById(sweet).style.display='block';
+    document.querySelectorAll('#'+sweet+' .slide').forEach((s,i)=>{
+        s.classList.remove('active');
+        if(i===0) s.classList.add('active');
+    });
+    currentSlide[sweet]=0;
+}
+
+function nextSlide(sweet){
+    let slides = document.querySelectorAll('#'+sweet+' .slide');
+    slides[currentSlide[sweet]].classList.remove('active');
+    currentSlide[sweet] = (currentSlide[sweet]+1)%slides.length;
+    slides[currentSlide[sweet]].classList.add('active');
+}
+
+function prevSlide(sweet){
+    let slides = document.querySelectorAll('#'+sweet+' .slide');
+    slides[currentSlide[sweet]].classList.remove('active');
+    currentSlide[sweet] = (currentSlide[sweet]-1+slides.length)%slides.length;
+    slides[currentSlide[sweet]].classList.add('active');
+}
+</script>
+
 </body>
-          </html>
-          
+</html>
