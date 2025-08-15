@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doces Divertidos 🍬</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            overflow-x: hidden;
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+        }
+
+        h1 {
+            color: #ff69b4;
+            font-size: 3em;
+            margin: 20px 0;
+            text-shadow: 2px 2px #fff;
+        }
+
+        .buttons-container {
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .sweet-btn {
+            background-color: #ffcc00;
+            border: 2px solid #ff69b4;
+            border-radius: 12px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sweet-btn:hover {
+            background-color: #ff69b4;
+            color: #fff;
+        }
+
+        .slide-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff7e6;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            font-size: 1.2em;
+            line-height: 1.5em;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide img {
+            max-width: 100%;
+            border-radius: 15px;
+            margin: 10px 0;
+        }
+
+        .nav-btn {
+            background-color: #ff69b4;
+            border: none;
+            padding: 10px 15px;
+            color: white;
+            font-size: 1em;
+            border-radius: 10px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background-color: #ff4500;
+        }
+
+        /* Animação de doces flutuando no fundo */
+        .candy {
+            position: absolute;
+            width: 50px;
+            animation: float linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0); }
+            100% { transform: translateY(-100vh) translateX(100px); }
+        }
+
+        /* Música de fundo botão */
+        #musicControl {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #ffcc00;
+            border: 2px solid #ff69b4;
+            border-radius: 50%;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Doces Divertidos 🍭</h1>
+
+    <!-- Botões dos doces -->
+    <div class="buttons-container">
+        <button class="sweet-btn" onclick="showSlides('brigadeiro')">Brigadeiro</button>
+        <button class="sweet-btn" onclick="showSlides('biscoito')">Biscoito</button>
+        <button class="sweet-btn" onclick="showSlides('cupcake')">Cupcake</button>
+        <button class="sweet-btn" onclick="showSlides('pudim')">Pudim</button>
+        <button class="sweet-btn" onclick="showSlides('churros')">Churros</button>
+        <button class="sweet-btn" onclick="showSlides('mousse')">Mousse</button>
+        <button class="sweet-btn" onclick="showSlides('brownie')">Brownie</button>
+        <button class="sweet-btn" onclick="showSlides('gelatina')">Gelatina</button>
+        <button class="sweet-btn" onclick="showSlides('pipoca')">Pipoca Doce</button>
+        <button class="sweet-btn" onclick="showSlides('donut')">Donut</button>
+    </div>
+
+    <!-- Slides Brigadeiro -->
+    <div id="brigadeiro" class="slide-container">
+        <h2>Brigadeiro 🍫</h2>
+        <div class="slide active">
+            <p>Passo 1: Coloque 1 lata de leite condensado, 1 colher de manteiga e 3 colheres de chocolate em pó na panela.</p>
+            <img src="https://i.imgur.com/8rZWy7v.jpg" alt="Brigadeiro Passo 1">
+        </div>
+        <div class="slide">
+            <p>Passo 2: Cozinhe em fogo médio, mexendo sempre, até desgrudar do fundo da panela.</p>
+            <img src="https://i.imgur.com/Jt3G8yc.jpg" alt="Brigadeiro Passo 2">
+        </div>
+        <div class="slide">
+            <p>Passo 3: Deixe esfriar, enrole e passe no granulado. Pronto para comer!</p>
+            <img src="https://i.imgur.com/YnXdk7k.jpg" alt="Brigadeiro Pronto">
+        </div>
+        <button class="nav-btn" onclick="prevSlide('brigadeiro')">⬅️ Anterior</button>
+        <button class="nav-btn" onclick="nextSlide('brigadeiro')">Próximo ➡️</button>
+    </div>
+
+    <!-- Você pode copiar este padrão e trocar as imagens para cada doce -->
+
+    <!-- Doces flutuantes no fundo -->
+    <img src="https://i.imgur.com/oH2fhO6.png" class="candy" style="left:10%; animation-duration:12s;">
+    <img src="https://i.imgur.com/8Z6Jg4C.png" class="candy" style="left:30%; animation-duration:15s;">
+    <img src="https://i.imgur.com/bzE7dFx.png" class="candy" style="left:50%; animation-duration:18s;">
+    <img src="https://i.imgur.com/4pQ7O1X.png" class="candy" style="left:70%; animation-duration:20s;">
+    <img src="https://i.imgur.com/hB9gQun.png" class="candy" style="left:90%; animation-duration:17s;">
+
+    <!-- Música de fundo -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-happyrock.mp3" type="audio/mpeg">
+    </audio>
+    <div id="musicControl" onclick="toggleMusic()">🎵</div>
+
+    <script>
+        let currentSlide = {
+            brigadeiro: 0, biscoito: 0, cupcake: 0, pudim: 0,
+            churros: 0, mousse: 0, brownie: 0, gelatina: 0,
+            pipoca: 0, donut: 0
+        };
+
+        function showSlides(sweet) {
+            document.querySelectorAll('.slide-container').forEach(c => c.style.display = 'none');
+            document.getElementById(sweet).style.display = 'block';
+            document.querySelectorAll('#' + sweet + ' .slide').forEach((s,i)=>{
+                s.classList.remove('active');
+                if(i === 0) s.classList.add('active');
+            });
+            currentSlide[sweet] = 0;
+        }
+
+        function nextSlide(sweet) {
+            let slides = document.querySelectorAll('#' + sweet + ' .slide');
+            slides[currentSlide[sweet]].classList.remove('active');
+            currentSlide[sweet] = (currentSlide[sweet] + 1) % slides.length;
+            slides[currentSlide[sweet]].classList.add('active');
+        }
+
+        function prevSlide(sweet) {
+            let slides = document.querySelectorAll('#' + sweet + ' .slide');
+            slides[currentSlide[sweet]].classList.remove('active');
+            currentSlide[sweet] = (currentSlide[sweet] - 1 + slides.length) % slides.length;
+            slides[currentSlide[sweet]].classList.add('active');
+        }
+
+        // Música de fundo
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            if(music.paused) music.play();
+            else music.pause();
+        }
+    </script>
+</body>
+          </html>
+          
